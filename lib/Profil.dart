@@ -17,6 +17,7 @@ class _ProfilState extends State<Profil>{
             children: <Widget>[
               Container(
                 child: Image.asset('assets/img/logo.png',scale: 4,),
+
               ),
               Text('Nama : Kevin Haidar',style: TextStyle(fontFamily: 'Montserrat'),),
               Text('NIP  : 165150201111196',style: TextStyle(fontFamily: 'Montserrat'),),
