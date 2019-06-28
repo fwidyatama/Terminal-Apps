@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:terminal_apps/Login.dart';
 import 'package:terminal_apps/Tes.dart';
 import 'package:terminal_apps/Navbar.dart';
 import 'package:intl/intl.dart';
-
+import 'package:http/http.dart' as http;
 
 
 class Home extends StatefulWidget {
@@ -26,7 +25,6 @@ class Grup extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
       routes: routes,
     );
   }
@@ -49,7 +47,7 @@ class _Home extends State<Home> {
     List<String> dummy = ["Task1","Task2","Task2","Task2","Task2","Task2","Task2"
       ,"Task2","Task2","Task2","Task2","Task2","Task2","Task2","Task2","Task2","Task10"];
 
-    final _layoutPage = [Home(),Tes(),Login()];
+    final _layoutPage = [Home(),Tes(),Tes()];
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('EEE d MMM yyyy').format(now);
 
