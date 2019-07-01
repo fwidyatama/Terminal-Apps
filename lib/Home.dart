@@ -3,8 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:terminal_apps/Tes.dart';
 import 'package:terminal_apps/Navbar.dart';
 import 'package:intl/intl.dart';
+import 'fetchAPI.dart';
 import 'package:http/http.dart' as http;
-
+import 'dart:async';
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   @override
@@ -32,20 +34,36 @@ class Grup extends StatelessWidget {
 
 class _Home extends State<Home> {
   var search = GlobalKey<FormState>();
-
-
+  var jadwal = new List<Jadwal>();
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+  
+  @override
+  void initState(){
+    super.initState();
+    _getJadwal();
+  }
 
+  _getJadwal() {
+    fetchAPI.getUsers().then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        jadwal = list.map((model) => Jadwal.fromJson(model)).toList();
+      });
+    });
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<String> dummy = ["Task1","Task2","Task2","Task2","Task2","Task2","Task2"
-      ,"Task2","Task2","Task2","Task2","Task2","Task2","Task2","Task2","Task2","Task10"];
 
     final _layoutPage = [Home(),Tes(),Tes()];
     DateTime now = DateTime.now();
@@ -63,7 +81,7 @@ class _Home extends State<Home> {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
           child: Text(
-            'Result 5',
+            jadwal.length.toString(),
             style: TextStyle(fontSize: 15.0, color: Colors.grey),
           ),
         ),
@@ -103,7 +121,7 @@ class _Home extends State<Home> {
 
     return SafeArea(
       child: CustomScrollView(
-        semanticChildCount: dummy.length,
+        semanticChildCount: jadwal.length,
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 220,
@@ -130,7 +148,9 @@ class _Home extends State<Home> {
             ),
           ),
           SliverList(
+
               delegate:SliverChildBuilderDelegate((context,index){
+                
                 return Container(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   child:
@@ -150,7 +170,7 @@ class _Home extends State<Home> {
                                 scale: 3,
                               ),
                             ),
-                            Text(dummy[index]),
+                            Text(jadwal[index].id.toString()),
                           ],
                         ),
                         Expanded(
@@ -166,21 +186,21 @@ class _Home extends State<Home> {
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          Text('10.00',style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
+                                          Text(jadwal[index].keberangkatan.substring(11, 16),style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
                                           Text('WIB',style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
                                         ],
                                       ),
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: <Widget>[
-                                          Text('2 Hours',style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
+                                          Text(jadwal[index].tujuan,style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
                                           CustomPaint(painter: Drawhorizontalline()),
                                         ],
                                       ),
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: <Widget>[
-                                          Text('12.00',style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
+                                          Text(jadwal[index].kedatangan.substring(11, 16),style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
                                           Text('WIB',style: TextStyle(color: Colors.black,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
                                         ],
                                       ),
@@ -210,7 +230,7 @@ class _Home extends State<Home> {
                                               borderRadius: new BorderRadius.all(Radius.circular(20.0))
                                           ),
                                           child: Center(
-                                            child: Text('On Schedule',style: TextStyle(color: Colors.white,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
+                                            child: Text(jadwal[index].status,style: TextStyle(color: Colors.white,fontFamily: 'SF-UI-Display-Regular',fontSize: 15),),
                                           ),
                                         ),
                                       ),
@@ -232,7 +252,7 @@ class _Home extends State<Home> {
                   ),
                 );
               },
-                  childCount: dummy.length)
+                  childCount: jadwal == null ? 0 : jadwal.length)
           )
         ],
       ),
@@ -260,3 +280,6 @@ class Drawhorizontalline extends CustomPainter {
     return false;
   }
 }
+
+
+

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:terminal_apps/Tes.dart';
 import 'package:terminal_apps/Home.dart';
+import 'package:terminal_apps/Profil.dart';
 
 class Navbar extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _NavbarState extends State<Navbar> {
     });
   }
   int _selectedIndex = 0;
-  final _layoutPage=[Home(),Tes(),Tes()];
+  final _layoutPage=[Home(),Tes(),Profil()];
  
   @override
   Widget build(BuildContext context) {

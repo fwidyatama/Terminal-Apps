@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Ehehe",
       home: Scaffold(resizeToAvoidBottomPadding: false,
-        body: Profil(),
+        body: Home(),
       ),
       debugShowCheckedModeBanner: false,
     );
@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
           )
 
         ],
-      ),);
-
+      ),
+    );
   }
 }
