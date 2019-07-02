@@ -151,7 +151,7 @@ class _Home extends State<Home> {
 
               delegate:SliverChildBuilderDelegate((context,index){
                 
-                return Container(
+                return Container( 
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   child:
                   Container(
@@ -252,7 +252,7 @@ class _Home extends State<Home> {
                   ),
                 );
               },
-                  childCount: jadwal == null ? 0 : jadwal.length)
+                  childCount: jadwal == null ? 0 : jadwal.length),
           )
         ],
       ),
