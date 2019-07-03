@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:terminal_apps/Home.dart';
+import 'deskripsi.dart';
 import 'package:terminal_apps/Profil.dart';
 import 'Navbar.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Ehehe",
       home: Scaffold(resizeToAvoidBottomPadding: false,
-        body: Home(),
+        body: Deskripsi(),
       ),
       debugShowCheckedModeBanner: false,
     );
