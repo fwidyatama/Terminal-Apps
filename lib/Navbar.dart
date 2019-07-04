@@ -4,6 +4,7 @@ import 'package:terminal_apps/Home.dart';
 import 'package:terminal_apps/Profil.dart';
 
 class Navbar extends StatefulWidget {
+  
   @override
   _NavbarState createState() => _NavbarState();
 }
@@ -15,8 +16,11 @@ class _NavbarState extends State<Navbar> {
     });
   }
   int _selectedIndex = 0;
+  
+  
+  
   final _layoutPage=[Home(),Tes(),Profil()];
- 
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

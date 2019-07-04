@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:terminal_apps/Home.dart';
@@ -59,11 +60,12 @@ class _LoginState extends State<Login> {
       }else{
         var token = datauser[1]['token'];
         Navigator.pushReplacementNamed(context, '/Navbar');
-        setState(() {
-          token = datauser[1]['token'];
-        });
       }
+      setState(() {
+          String token = datauser[1]['token'];
+        });
     }
+    return datauser;
   }
 
   var email = GlobalKey<FormState>();
