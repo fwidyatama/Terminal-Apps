@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:terminal_apps/Tes.dart';
-import 'package:terminal_apps/Home.dart';
-import 'package:terminal_apps/Profil.dart';
+import 'package:terminal_apps/Views/Home.dart';
+import 'package:terminal_apps/Views/Profil.dart';
 
 class Navbar extends StatefulWidget {
   
@@ -19,7 +18,7 @@ class _NavbarState extends State<Navbar> {
   
   
   
-  final _layoutPage=[Home(),Tes(),Profil()];
+  final _layoutPage=[Home(),Profil()];
   
   @override
   Widget build(BuildContext context) {
