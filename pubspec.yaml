@@ -26,6 +26,7 @@ dependencies:
   intl: ^0.15.8
   http: ^0.12.0
   json_serializable: ^3.0.0
+  flutter_responsive_screen: ^1.0.0
 
 dev_dependencies:
   flutter_test:

@@ -94,8 +94,6 @@ class _Home extends State<Home> {
 
     );
 
-
-
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(

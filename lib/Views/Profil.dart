@@ -1,11 +1,40 @@
 import 'package:flutter/material.dart';
-
+import 'package:terminal_apps/Navbar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:terminal_apps/Models/User.dart';
 class Profil extends StatefulWidget {
+  final User value;
+  Profil({Key key, this.value}) : super(key:key);
   @override
   _ProfilState createState() => _ProfilState();
 }
 
 class _ProfilState extends State<Profil> {
+  List<User> user = List();
+  //String token = token;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getUser();
+  // }
+
+  // _getUser() async {
+  //   var response = await http.post(
+  //       'https://faridstorage.blob.core.windows.net/blockblobsdhyilo/jadwal.json',body: {
+  //         //"token":token
+  //       });
+  //   if (response.statusCode == 200) {
+  //     setState(() {
+  //       final data = json.decode(response.body) as List;
+  //       user = data.map((data) => User.fromJSON(data)).toList();
+  //     });
+  //   } else {
+  //     throw Exception('Failed to fetch data');
+  //   }
+  // }
+
+  
   void _showDialog() {
     // flutter defined function
     showDialog(
@@ -31,7 +60,7 @@ class _ProfilState extends State<Profil> {
               highlightElevation: 0,
               child: new Text("Ya",style: TextStyle(color: Colors.white),),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pushReplacementNamed(context, '/Login');
               },
             ),
           ],
@@ -54,14 +83,62 @@ class _ProfilState extends State<Profil> {
                   scale: 4,
                 ),
               ),
-              Text(
-                'Nama : Kevin Haidar',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              Text(
-                'NIP  : 165150201111196',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
+              // Text(
+              //   'Nama : Kevin Haidar',
+              //   style: TextStyle(fontFamily: 'Montserrat'),
+              // ),
+              // Text(
+              //   'NIP  : 165150201111196',
+              //   style: TextStyle(fontFamily: 'Montserrat'),
+              // ),
+              Container(
+                    padding: EdgeInsets.fromLTRB(40, 20, 30, 20),
+                    width: 300,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.account_circle,size: 20,),
+                            Text("Username",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                          ],
+                        ),
+                        TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                              hintText: "kevdo98",
+                          ),
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.person,size: 20,),
+                            Text("Nama",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                          ],
+                        ),
+                        TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                              hintText: "Kevin Dominic ",
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.work,size: 20,),
+                            Text(" Role",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
+                          ],
+                        ),
+
+                        TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            hintText: "Petugas Terminal",
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                      ],
+                    ),
+                  ),
               SizedBox(height: 30,),
               RaisedButton(
                 onPressed: () {

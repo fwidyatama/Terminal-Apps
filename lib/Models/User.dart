@@ -4,8 +4,9 @@ class User {
  final String username;
  final String role;
  final String foto;
+ final String token;
 
-  User({this.id, this.nama, this.username, this.role, this.foto});
+  User({this.id, this.nama, this.username, this.role, this.foto,this.token});
 
   factory User.fromJSON(Map<String, dynamic> json){
     return User(

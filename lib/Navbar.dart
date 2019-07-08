@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:terminal_apps/Views/Home.dart';
 import 'package:terminal_apps/Views/Profil.dart';
+import 'package:terminal_apps/Models/User.dart';
 
 class Navbar extends StatefulWidget {
-  
+  final User value;
+  Navbar({Key key, this.value}) : super(key:key);
   @override
   _NavbarState createState() => _NavbarState();
 }
@@ -15,7 +17,7 @@ class _NavbarState extends State<Navbar> {
     });
   }
   int _selectedIndex = 0;
-  
+
   
   
   final _layoutPage=[Home(),Profil()];
