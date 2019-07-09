@@ -9,32 +9,7 @@ class Profil extends StatefulWidget {
   @override
   _ProfilState createState() => _ProfilState();
 }
-
 class _ProfilState extends State<Profil> {
-  List<User> user = List();
-  //String token = token;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _getUser();
-  // }
-
-  // _getUser() async {
-  //   var response = await http.post(
-  //       'https://faridstorage.blob.core.windows.net/blockblobsdhyilo/jadwal.json',body: {
-  //         //"token":token
-  //       });
-  //   if (response.statusCode == 200) {
-  //     setState(() {
-  //       final data = json.decode(response.body) as List;
-  //       user = data.map((data) => User.fromJSON(data)).toList();
-  //     });
-  //   } else {
-  //     throw Exception('Failed to fetch data');
-  //   }
-  // }
-
-  
   void _showDialog() {
     // flutter defined function
     showDialog(
@@ -42,7 +17,7 @@ class _ProfilState extends State<Profil> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("Keluar Aplikasi"),
+          title: new Text("Keluar Aplikasi "),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new RaisedButton(
@@ -83,14 +58,6 @@ class _ProfilState extends State<Profil> {
                   scale: 4,
                 ),
               ),
-              // Text(
-              //   'Nama : Kevin Haidar',
-              //   style: TextStyle(fontFamily: 'Montserrat'),
-              // ),
-              // Text(
-              //   'NIP  : 165150201111196',
-              //   style: TextStyle(fontFamily: 'Montserrat'),
-              // ),
               Container(
                     padding: EdgeInsets.fromLTRB(40, 20, 30, 20),
                     width: 300,
@@ -106,7 +73,7 @@ class _ProfilState extends State<Profil> {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                              hintText: "kevdo98",
+                              hintText: '${widget.value.username}',
                           ),
                         ),
                         Row(
@@ -118,7 +85,7 @@ class _ProfilState extends State<Profil> {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                              hintText: "Kevin Dominic ",
+                              hintText: '${widget.value.nama}',
                           ),
                         ),
                         const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
@@ -128,11 +95,10 @@ class _ProfilState extends State<Profil> {
                             Text(" Role",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
                           ],
                         ),
-
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: "Petugas Terminal",
+                            hintText: '${widget.value.role}',
                           ),
                         ),
                         const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),

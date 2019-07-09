@@ -39,7 +39,10 @@ class _LoginState extends State<Login> {
         var route = new MaterialPageRoute(
             builder: (BuildContext context) => Navbar(
               value: User(
-                token: datauser[1]['token']
+                nama: datauser['data']['nama'],
+                username: datauser['data']['username'],
+                role: datauser['data']['access_role'],
+                token: datauser['meta']['token']
               ),
             )
         );

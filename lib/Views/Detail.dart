@@ -97,7 +97,6 @@ class Detail extends StatelessWidget {
                             Text(" Tanggal",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
                           ],
                         ),
-
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
