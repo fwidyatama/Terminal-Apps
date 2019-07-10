@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-//import 'package:terminal_apps/Navbar.dart';
-//import 'package:http/http.dart' as http;
-//import 'dart:convert';
-import 'package:terminal_apps/Models/User.dart';
+import 'package:terminal_apps/Models/user.dart';
 class Profil extends StatefulWidget {
   final User value;
   Profil({Key key, this.value}) : super(key:key);
   @override
-    _ProfilState createState() => _ProfilState();
-  }
-  class _ProfilState extends State<Profil> {
-    void _showDialog() {
-      // flutter defined function
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
+  _ProfilState createState() => _ProfilState();
+}
+class _ProfilState extends State<Profil> {
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
         return AlertDialog(
           title: new Text("Keluar Aplikasi "),
           actions: <Widget>[
@@ -59,52 +56,51 @@ class Profil extends StatefulWidget {
                 ),
               ),
               Container(
-                    padding: EdgeInsets.fromLTRB(40, 20, 30, 20),
-                    width: 300,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                padding: EdgeInsets.fromLTRB(40, 20, 30, 20),
+                width: 300,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.account_circle,size: 20,),
-                            Text("Username",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
-                          ],
-                        ),
-                        TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                              hintText: '${widget.value.username}',
-                          ),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.person,size: 20,),
-                            Text("Nama",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
-                          ],
-                        ),
-                        TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                              hintText: '${widget.value.nama}',
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.work,size: 20,),
-                            Text(" Role",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
-                          ],
-                        ),
-                        TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                            hintText: '${widget.value.role}',
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                        Icon(Icons.account_circle,size: 20,),
+                        Text("Username",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
                       ],
                     ),
-                  ),
+                    TextField(
+                      enabled: false,
+                      decoration: InputDecoration(
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.person,size: 20,),
+                        Text("Nama",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                      ],
+                    ),
+                    TextField(
+                      enabled: false,
+                      decoration: InputDecoration(
+//                        hintText: '${widget.value.nama}',
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.work,size: 20,),
+                        Text(" Role",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
+                      ],
+                    ),
+                    TextField(
+                      enabled: false,
+                      decoration: InputDecoration(
+                        //hintText: '${widget.value.role}',
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                  ],
+                ),
+              ),
               SizedBox(height: 30,),
               RaisedButton(
                 onPressed: () {

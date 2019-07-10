@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:terminal_apps/Models/data.dart';
 
 class Detail extends StatelessWidget {
-  final String keberangkatan, tujuan, kedatangan, status;
-  final int id;
+ final int id;
+ final String waktu;
+ final String kota;
+ final String statusKegiatan;
+ final String statusKapal;
+ final String statusTiket;
+ final String kapal;
+ final String agenPelayaran;
+ final String updatedAt;
 
-  const Detail(
-      {Key key,
-      this.id,
-      this.keberangkatan,
-      this.tujuan,
-      this.kedatangan,
-      this.status})
-      : super(key: key);
+  const Detail({Key key, this.id, this.waktu, this.kota, this.statusKegiatan, this.statusKapal, this.statusTiket, this.kapal, this.agenPelayaran, this.updatedAt}) : super(key: key);
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -61,11 +66,11 @@ class Detail extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      "Kapal Api",
+                                      kapal,
                                       style: TextStyle(fontSize: 25),
                                     ),
                                     Text(
-                                      "Agen Kopi",
+                                     agenPelayaran,
                                       style: TextStyle(fontSize: 25),
                                     ),
                                   ],
@@ -78,6 +83,7 @@ class Detail extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+<<<<<<< HEAD
                         Row(
                           children: <Widget>[
                             Icon(
@@ -95,6 +101,19 @@ class Detail extends StatelessWidget {
                           enabled: false,
                           decoration: InputDecoration(
                             hintText: kedatangan.substring(11, 16) + " WIB ",
+=======
+                       Row(
+                         children: <Widget>[
+                         Icon(Icons.arrow_upward,size: 20,),
+                         Text(" kedatangan",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                       ],
+                    ),
+                        TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                              hintText: waktu,
+                              hintStyle: TextStyle(color: Colors.black)
+>>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
                           ),
                         ),
                         const Padding(
@@ -113,13 +132,19 @@ class Detail extends StatelessWidget {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
+<<<<<<< HEAD
                             hintText: kedatangan.substring(0, 11),
+=======
+                              hintText: waktu,
+                              hintStyle: TextStyle(color: Colors.black)
+>>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
                           ),
                         ),
                         const Padding(
                             padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
                         Row(
                           children: <Widget>[
+<<<<<<< HEAD
                             Icon(
                               Icons.location_city,
                               size: 20,
@@ -127,12 +152,17 @@ class Detail extends StatelessWidget {
                             Text(" Tujuan",
                                 style: TextStyle(
                                     fontFamily: 'Lato-Regular', fontSize: 17))
+=======
+                            Icon(Icons.location_city,size: 20,),
+                            Text(" Tujuan",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17)),
+>>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
                           ],
                         ),
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: tujuan,
+                            hintText: kota,
+                            hintStyle: TextStyle(color: Colors.black)
                           ),
                         ),
                       ],

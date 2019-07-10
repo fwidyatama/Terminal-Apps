@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:terminal_apps/Views/Home.dart';
-//import 'package:terminal_apps/Views/Profil.dart';
+import 'package:terminal_apps/Views/navbar.dart';
 import 'package:terminal_apps/Views/Login.dart';
-import 'package:terminal_apps/Navbar.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -25,7 +24,6 @@ class MyApp extends StatelessWidget {
       routes: <String,WidgetBuilder>{
         '/Login' : (BuildContext context) => new Login(),
         '/Navbar' : (BuildContext context) => new Navbar(),
-        
       },
     );
   }
