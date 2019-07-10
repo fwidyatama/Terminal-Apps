@@ -179,106 +179,44 @@ class _Home extends State<Home> {
                                         ],
                                       ),
                                       Expanded(
-                                          child: Container(
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 7),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Flexible(
-                                                  child:
-                                                  Text(
-                                                    jadwal[index].kota,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontFamily:
-                                                            'SF-UI-Display-Regular',
-                                                        fontSize: 13),
-                                                    textAlign: TextAlign.center,
+                                        child: Container(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: <Widget>[
+                                              Text(jadwal[index].kapal.nama.toString(),style: TextStyle(fontFamily: "Montserrat",fontSize: 16,color: Colors.blueGrey),),
+                                              Divider(height: 2,),
+                                              SizedBox(height: 3,),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Column(
+                                                    children: <Widget>[
+                                                      Text(jadwal[index].waktu.substring(11, 16).toString()+" WIB",style: TextStyle(color: Colors.black,fontFamily: "Montserrat",fontSize: 15,fontWeight: FontWeight.bold),),
+                                                      
+                                                    ],
                                                   ),
-                                                ),
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      jadwal[index]
-                                                          .waktu
-                                                          .substring(11, 16),
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontFamily:
-                                                              'SF-UI-Display-Regular',
-                                                          fontSize: 13),
-                                                    ),
-                                                    Text(
-                                                      'WIB',
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontFamily:
-                                                              'SF-UI-Display-Regular',
-                                                          fontSize: 13),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                Expanded(
-                                                  child: Container(
-                                                    padding: EdgeInsets.all(10),
-                                                    height: 30,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Container(
-                                                    padding: EdgeInsets.all(10),
-                                                    height: 40,
-                                                    decoration: BoxDecoration(
-                                                        color: Color.fromRGBO(
-                                                            0, 218, 93, 100),
-                                                        borderRadius:
-                                                            new BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    20.0))),
-                                                    child: Center(
-                                                      child: Text(
-                                                        jadwal[index].statusKapal,
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily:
-                                                                'Segoe UI',
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
+                                                  Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Container(
+                                                        alignment: Alignment.center,
+                                                        height: 30,
+                                                        width: 130,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                                          gradient: LinearGradient(colors: [Colors.green,Colors.indigo])
                                                         ),
+                                                        child: Text(jadwal[index].statusKapal,style: TextStyle(fontFamily: "Montserrat",color: Colors.white,fontSize: 15),),
+                                                      )
+                                                    ],
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    padding: EdgeInsets.all(10),
-                                                    height: 30,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 3,),
+                                              Text(jadwal[index].kota,style: TextStyle(color: Colors.blueGrey,fontFamily: "Montserrat",fontSize: 15,fontWeight: FontWeight.bold),),
+                                            ],
+                                          ),
                                       )),
                                     ],
                                   ),

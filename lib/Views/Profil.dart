@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terminal_apps/Models/User.dart';
+import 'package:terminal_apps/Models/user.dart';
 class Profil extends StatefulWidget {
   final User value;
   Profil({Key key, this.value}) : super(key:key);
