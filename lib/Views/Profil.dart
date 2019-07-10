@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:terminal_apps/Navbar.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+//import 'package:terminal_apps/Navbar.dart';
+//import 'package:http/http.dart' as http;
+//import 'dart:convert';
 import 'package:terminal_apps/Models/User.dart';
 class Profil extends StatefulWidget {
   final User value;
   Profil({Key key, this.value}) : super(key:key);
   @override
-  _ProfilState createState() => _ProfilState();
-}
-class _ProfilState extends State<Profil> {
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
+    _ProfilState createState() => _ProfilState();
+  }
+  class _ProfilState extends State<Profil> {
+    void _showDialog() {
+      // flutter defined function
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
         return AlertDialog(
           title: new Text("Keluar Aplikasi "),
           actions: <Widget>[

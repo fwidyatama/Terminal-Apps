@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:terminal_apps/Views/Home.dart';
 import 'package:terminal_apps/Views/Profil.dart';
 import 'package:terminal_apps/Models/User.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Navbar extends StatefulWidget {
   final User value;
   Navbar({Key key, this.value}) : super(key:key);
   @override
   _NavbarState createState() => _NavbarState();
+}
+
+Future<String> _GetData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String username = prefs.getString("username");
+  String name = prefs.getString("name");
+  String role = prefs.getString("role");
+  String token = prefs.getString("token");
+  return username  ;
 }
 
 class _NavbarState extends State<Navbar> {
@@ -17,11 +27,7 @@ class _NavbarState extends State<Navbar> {
     });
   }
   int _selectedIndex = 0;
-
-  
-  
-  final _layoutPage=[Home(),Profil()];
-  
+  final _layoutPage=[Home(),Home(),Profil()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,7 +46,8 @@ class _NavbarState extends State<Navbar> {
               title: new Text('Kedatangan'),
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text('Profil')),
+              icon: Icon(Icons.person), 
+              title: Text('Profil')),
           ],
           selectedItemColor: Colors.blueAccent,
           onTap: _onItemTapped,

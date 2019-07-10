@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:terminal_apps/Views/Home.dart';
-import 'package:terminal_apps/Views/Detail.dart';
+//import 'package:terminal_apps/Views/Home.dart';
+//import 'package:terminal_apps/Views/Detail.dart';
 import 'package:terminal_apps/Models/User.dart';
-import 'package:terminal_apps/Views/Profil.dart';
+//import 'package:terminal_apps/Views/Profil.dart';
 import 'package:http/http.dart' as http;
 import 'package:terminal_apps/Navbar.dart';
 
@@ -17,7 +15,18 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
+Future<bool> _SaveData(String username,String name,String role,String token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("username", username);
+  prefs.setString("name", name);
+  prefs.setString("role", role);
+  prefs.setString("token", token);
+  return prefs.commit();
+}
+
 class _LoginState extends State<Login> {
+  
+
   Future<List> _login() async {
     final response = await http.post('http', body: {
       "username": _email.text,
@@ -35,26 +44,32 @@ class _LoginState extends State<Login> {
           );
         });
       } else {
-        Navigator.pushReplacementNamed(context, '/Navbar');
-        var route = new MaterialPageRoute(
-            builder: (BuildContext context) => Navbar(
-              value: User(
-                nama: datauser['data']['nama'],
-                username: datauser['data']['username'],
-                role: datauser['data']['access_role'],
-                token: datauser['meta']['token']
-              ),
-            )
-        );
-        
+        // var route = new MaterialPageRoute(
+        //     builder: (BuildContext context) => Navbar(
+        //       value: User(
+        //         nama: datauser['data']['nama'],
+        //         username: datauser['data']['username'],
+        //         role: datauser['data']['access_role'],
+        //         token: datauser['meta']['token']
+        //       ),
+        //     )
+        // );
+        //Navigator.of(context).pushReplacement(route);
+        String username = datauser['data']['username'];
+        String name = datauser['data']['name'];
+        String role = datauser['data']['access_role'];
+        String token = datauser['meta']['token'];
+        _SaveData(username, name, role, token).then((bool commited){
+          Navigator.of(context).pushReplacementNamed("/Navbar");
+        });
       }
       setState(() {
-        var token = datauser[1]['token'];
+        //var token = datauser[1]['token'];
       });
     }
     return datauser;
   }
-
+  
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
 

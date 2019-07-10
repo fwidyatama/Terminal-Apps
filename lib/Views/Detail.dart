@@ -78,36 +78,55 @@ class Detail extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                       Row(
-                         children: <Widget>[
-                        Icon(Icons.arrow_downward,size: 20,),
-                           Text(" Kedatangan",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
-                         ],
-                    ),
-                        TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                              hintText: kedatangan.substring(11,16)+" WIB ",
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
                         Row(
                           children: <Widget>[
-                            Icon(Icons.calendar_today,size: 20,),
-                            Text(" Tanggal",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
+                            Icon(
+                              Icons.arrow_downward,
+                              size: 20,
+                            ),
+                            Text(
+                              " Kedatangan",
+                              style: TextStyle(
+                                  fontFamily: 'Lato-Regular', fontSize: 17),
+                            )
                           ],
                         ),
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: kedatangan.substring(0,11),
+                            hintText: kedatangan.substring(11, 16) + " WIB ",
                           ),
                         ),
-                        const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                        const Padding(
+                            padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
                         Row(
                           children: <Widget>[
-                            Icon(Icons.location_city,size: 20,),
-                            Text(" Tujuan",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
+                            Icon(
+                              Icons.calendar_today,
+                              size: 20,
+                            ),
+                            Text(" Tanggal",
+                                style: TextStyle(
+                                    fontFamily: 'Lato-Regular', fontSize: 17))
+                          ],
+                        ),
+                        TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            hintText: kedatangan.substring(0, 11),
+                          ),
+                        ),
+                        const Padding(
+                            padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.location_city,
+                              size: 20,
+                            ),
+                            Text(" Tujuan",
+                                style: TextStyle(
+                                    fontFamily: 'Lato-Regular', fontSize: 17))
                           ],
                         ),
                         TextField(
@@ -124,31 +143,34 @@ class Detail extends StatelessWidget {
                       children: <Widget>[
                         Text("Update Status"),
                         FlatButton(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-
-                        color: Colors.lightBlue,
-                        onPressed: (){},
-                        child: Text("On Schedule"),),
-                        FlatButton(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
                           color: Colors.lightBlue,
-                          onPressed: (){},
-                          child: Text("Delay"),),
+                          onPressed: () {},
+                          child: Text("On Schedule"),
+                        ),
                         FlatButton(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
                           color: Colors.lightBlue,
-                          onPressed: (){},
-                          child: Text("Cancel"),)
+                          onPressed: () {},
+                          child: Text("Delay"),
+                        ),
+                        FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          color: Colors.lightBlue,
+                          onPressed: () {},
+                          child: Text("Cancel"),
+                        )
                       ],
                     ),
                   )
                 ],
               ),
             )
-            )
+          )
         )
-    );
+      );
   }
 }
