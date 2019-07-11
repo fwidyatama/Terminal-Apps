@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:terminal_apps/Models/data.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Detail extends StatelessWidget {
   final int id;
@@ -25,6 +28,28 @@ class Detail extends StatelessWidget {
       this.updatedAt})
       : super(key: key);
 
+  Future<void> _UpdateStatus(String status) async {
+    try{
+      var token;
+      final response = await http.post('http://10.2.232.132:80/api/login',
+          headers:
+          {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader: "$token"
+          },
+          body: {
+            "statusKapal": status,
+          });
+      var dapet = json.decode(response.body);
+      
+      if (response.statusCode == 200) {
+        
+      }
+    }catch(e){
+      
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -181,7 +206,9 @@ class Detail extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             color: Colors.green,
-                            onPressed: () {},
+                            onPressed: () {
+                              _UpdateStatus("On Schedule");
+                            },
                             child: Text("On Schedule"),
                           ),
                         ),
@@ -192,7 +219,9 @@ class Detail extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             color: Colors.yellow,
-                            onPressed: () {},
+                            onPressed: () {
+                              _UpdateStatus("Delay");
+                            },
                             child: Text("Delay"),
                           ),
                         ),
@@ -203,7 +232,9 @@ class Detail extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             color: Colors.red,
-                            onPressed: () {},
+                            onPressed: () {
+                              _UpdateStatus("Delay");
+                            },
                             child: Text("Canceled"),
                           ),
                         ),

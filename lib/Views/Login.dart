@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:terminal_apps/Models/user.dart';
@@ -23,6 +23,14 @@ class _LoginState extends State<Login> {
   var username = GlobalKey<FormState>();
   var password = GlobalKey<FormState>();
 
+  _saveValues(String username, String name, String role, String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("username", username);
+    prefs.setString("name", name);
+    prefs.setString("role", role);
+    prefs.setString("token", token);
+  }
+
   Future<void> _login() async {
     try {
       final response = await http.post('http://10.2.232.132:80/api/login',
@@ -38,20 +46,11 @@ class _LoginState extends State<Login> {
 
       if (response.statusCode == 200) {
        Navigator.pushReplacementNamed(context, '/Navbar');
-
-        var route = new MaterialPageRoute(
-              builder: (context) =>
-                  Navbar(
-                    value: User(
-                        token: datauser['meta']['token'],
-                      nama: datauser['data']
-                    ),
-                  ),
-          );
-
-        setState(() {
-          var token = datauser['meta']['token'];
-        });
+        String username = datauser['data']['username'];
+        String name = datauser['data']['name'];
+        String role = datauser['data']['access_role'];
+        var token = datauser['meta']['token'];
+        _saveValues(username, name, role, token);
       }
       else if(response.statusCode==400){
        setState(() {

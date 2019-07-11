@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terminal_apps/Models/user.dart';
 class Profil extends StatefulWidget {
   final User value;
@@ -7,6 +8,14 @@ class Profil extends StatefulWidget {
   _ProfilState createState() => _ProfilState();
 }
 class _ProfilState extends State<Profil> {
+  String username;
+  String name;
+  String role;
+  @override
+  void initState() {
+    _getValues();
+    super.initState();
+  }
   void _showDialog() {
     // flutter defined function
     showDialog(
@@ -40,6 +49,12 @@ class _ProfilState extends State<Profil> {
       },
     );
   }
+  _getValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    username = prefs.getString("username");
+    name = prefs.getString("name");
+    role = prefs.getString("role");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +79,7 @@ class _ProfilState extends State<Profil> {
                     Row(
                       children: <Widget>[
                         Icon(Icons.account_circle,size: 20,),
-                        Text("Username",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                        Text(username,style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
                       ],
                     ),
                     TextField(
@@ -75,7 +90,7 @@ class _ProfilState extends State<Profil> {
                     Row(
                       children: <Widget>[
                         Icon(Icons.person,size: 20,),
-                        Text("Nama",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                        Text(name,style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
                       ],
                     ),
                     TextField(
@@ -88,7 +103,7 @@ class _ProfilState extends State<Profil> {
                     Row(
                       children: <Widget>[
                         Icon(Icons.work,size: 20,),
-                        Text(" Role",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
+                        Text(role,style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
                       ],
                     ),
                     TextField(
