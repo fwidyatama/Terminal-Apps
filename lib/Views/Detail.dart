@@ -2,20 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:terminal_apps/Models/data.dart';
 
 class Detail extends StatelessWidget {
- final int id;
- final String waktu;
- final String kota;
- final String statusKegiatan;
- final String statusKapal;
- final String statusTiket;
- final String kapal;
- final String agenPelayaran;
- final String updatedAt;
+  final int id;
+  final String waktu;
+  final String kota;
+  final String statusKegiatan;
+  final String statusKapal;
+  final String statusTiket;
+  final String kapal;
+  final String agenPelayaran;
+  final String updatedAt;
 
-  const Detail({Key key, this.id, this.waktu, this.kota, this.statusKegiatan, this.statusKapal, this.statusTiket, this.kapal, this.agenPelayaran, this.updatedAt}) : super(key: key);
-
-
-
+  const Detail(
+      {Key key,
+      this.id,
+      this.waktu,
+      this.kota,
+      this.statusKegiatan,
+      this.statusKapal,
+      this.statusTiket,
+      this.kapal,
+      this.agenPelayaran,
+      this.updatedAt})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +42,9 @@ class Detail extends StatelessWidget {
               elevation: 0,
             ),
             body: Scaffold(
-                body: Container(
+              body: Container(
               color: Colors.white,
-              padding: EdgeInsets.only(top: 30),
+              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -50,11 +58,10 @@ class Detail extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        border: Border.all(color: Colors.lightBlue)),
+                        color: Colors.white,),
                     child: Center(
                         child: Container(
-                            padding: EdgeInsets.fromLTRB(0, 30, 0, 50),
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -66,11 +73,11 @@ class Detail extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      kapal,
+                                      kapal.toString(),
                                       style: TextStyle(fontSize: 25),
                                     ),
                                     Text(
-                                     agenPelayaran,
+                                      agenPelayaran.toString(),
                                       style: TextStyle(fontSize: 25),
                                     ),
                                   ],
@@ -83,15 +90,14 @@ class Detail extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-<<<<<<< HEAD
                         Row(
                           children: <Widget>[
                             Icon(
-                              Icons.arrow_downward,
+                              Icons.arrow_upward,
                               size: 20,
                             ),
                             Text(
-                              " Kedatangan",
+                              " kedatangan",
                               style: TextStyle(
                                   fontFamily: 'Lato-Regular', fontSize: 17),
                             )
@@ -100,21 +106,8 @@ class Detail extends StatelessWidget {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: kedatangan.substring(11, 16) + " WIB ",
-=======
-                       Row(
-                         children: <Widget>[
-                         Icon(Icons.arrow_upward,size: 20,),
-                         Text(" kedatangan",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
-                       ],
-                    ),
-                        TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                              hintText: waktu,
-                              hintStyle: TextStyle(color: Colors.black)
->>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
-                          ),
+                              hintText: waktu.toString(),
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
                         const Padding(
                             padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
@@ -132,67 +125,88 @@ class Detail extends StatelessWidget {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-<<<<<<< HEAD
-                            hintText: kedatangan.substring(0, 11),
-=======
-                              hintText: waktu,
-                              hintStyle: TextStyle(color: Colors.black)
->>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
-                          ),
+                              hintText: waktu.toString(),
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
                         const Padding(
                             padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
                         Row(
                           children: <Widget>[
-<<<<<<< HEAD
                             Icon(
                               Icons.location_city,
                               size: 20,
                             ),
                             Text(" Tujuan",
                                 style: TextStyle(
-                                    fontFamily: 'Lato-Regular', fontSize: 17))
-=======
-                            Icon(Icons.location_city,size: 20,),
-                            Text(" Tujuan",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17)),
->>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
+                                    fontFamily: 'Lato-Regular', fontSize: 17)),
                           ],
                         ),
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: kota,
-                            hintStyle: TextStyle(color: Colors.black)
-                          ),
+                              hintText: kota.toString(),
+                              hintStyle: TextStyle(color: Colors.black)),
+                        ),
+                        const Padding(
+                            padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.flag,
+                              size: 20,
+                            ),
+                            Text(" Status Kapal",
+                                style: TextStyle(
+                                    fontFamily: 'Lato-Regular', fontSize: 17)),
+                          ],
+                        ),
+                        TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                              hintText: statusKapal.toString(),
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
                       ],
                     ),
                   ),
                   Container(
+                    padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                     child: Column(
                       children: <Widget>[
                         Text("Update Status"),
-                        FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          color: Colors.lightBlue,
-                          onPressed: () {},
-                          child: Text("On Schedule"),
+                        SizedBox(
+                          width: double.infinity,
+                          // height: double.infinity,
+                          child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            color: Colors.green,
+                            onPressed: () {},
+                            child: Text("On Schedule"),
+                          ),
                         ),
-                        FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          color: Colors.lightBlue,
-                          onPressed: () {},
-                          child: Text("Delay"),
+                        SizedBox(
+                          width: double.infinity,
+                          // height: double.infinity,
+                          child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            color: Colors.yellow,
+                            onPressed: () {},
+                            child: Text("Delay"),
+                          ),
                         ),
-                        FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          color: Colors.lightBlue,
-                          onPressed: () {},
-                          child: Text("Cancel"),
-                        )
+                        SizedBox(
+                          width: double.infinity,
+                          // height: double.infinity,
+                          child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            color: Colors.red,
+                            onPressed: () {},
+                            child: Text("Canceled"),
+                          ),
+                        ),
                       ],
                     ),
                   )

@@ -96,13 +96,7 @@ class _Home extends State<Home> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
           ),
-<<<<<<< HEAD
-        )
-
-    );
-=======
         ));
->>>>>>> 1fa326bf9f602cf56a98edd8e9ac16907b70b2e0
 
     return MaterialApp(
         home: Scaffold(
@@ -152,6 +146,7 @@ class _Home extends State<Home> {
                                       kapal: jadwal[index].kapal.nama,
                                       agenPelayaran: jadwal[index].agenPelayaran.nama,
                                       kota: jadwal[index].kota,
+                                      statusKapal: jadwal[index].statusKapal,
 
                                         )));
                           },
