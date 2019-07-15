@@ -17,7 +17,7 @@ class _Home extends State<Home> {
   SpinKitThreeBounce _spinKitThreeBounce;
   var search = GlobalKey<FormState>();
   List jadwal = List();
-  int _selectedIndex = 0;
+  //int _selectedIndex = 0;
 
   @override
   void initState() {

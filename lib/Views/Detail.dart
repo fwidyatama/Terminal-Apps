@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:terminal_apps/Models/data.dart';
+//import 'package:terminal_apps/Models/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -28,9 +29,15 @@ class Detail extends StatelessWidget {
       this.updatedAt})
       : super(key: key);
 
+  
   Future<void> _UpdateStatus(String status) async {
     try{
       var token;
+      _getValues() async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        token = prefs.getString("token");
+      }
+      _getValues();
       final response = await http.post('http://10.2.232.132:80/api/login',
           headers:
           {
@@ -40,8 +47,7 @@ class Detail extends StatelessWidget {
           body: {
             "statusKapal": status,
           });
-      var dapet = json.decode(response.body);
-      
+      //var dapet = json.decode(response.body);
       if (response.statusCode == 200) {
         
       }
@@ -122,7 +128,7 @@ class Detail extends StatelessWidget {
                               size: 20,
                             ),
                             Text(
-                              " kedatangan",
+                              " Kedatangan",
                               style: TextStyle(
                                   fontFamily: 'Lato-Regular', fontSize: 17),
                             )

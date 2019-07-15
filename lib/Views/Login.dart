@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+//import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
-import 'package:terminal_apps/Models/user.dart';
-import 'package:terminal_apps/Views/navbar.dart';
+//import 'package:terminal_apps/Models/user.dart';
+//import 'package:terminal_apps/Views/navbar.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  SpinKitThreeBounce _spinKitThreeBounce;
+  //SpinKitThreeBounce _spinKitThreeBounce;
   String errorLogin;
   TextEditingController _username = new TextEditingController();
   TextEditingController _password = new TextEditingController();
