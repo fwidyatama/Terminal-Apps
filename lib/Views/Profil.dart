@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terminal_apps/Models/user.dart';
+import 'package:http/http.dart' as http;
+import 'package:terminal_apps/main.dart';
+import 'package:terminal_apps/Views/Login.dart' as login;
 class Profil extends StatefulWidget {
-  final User value;
-  Profil({Key key, this.value}) : super(key:key);
-  @override
+   @override
   _ProfilState createState() => _ProfilState();
 }
 class _ProfilState extends State<Profil> {
   String username;
   String name;
   String role;
+  String token;
+
   @override
   void initState() {
     _getValues();
@@ -41,7 +44,9 @@ class _ProfilState extends State<Profil> {
               highlightElevation: 0,
               child: new Text("Ya",style: TextStyle(color: Colors.white),),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/Login');
+                Navigator.of(context).pop();
+                _logout();
+
               },
             ),
           ],
@@ -50,10 +55,31 @@ class _ProfilState extends State<Profil> {
     );
   }
   _getValues() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    username = prefs.getString("username");
-    name = prefs.getString("name");
-    role = prefs.getString("role");
+    final prefs = await SharedPreferences.getInstance();
+     setState(() {
+       username = prefs.getString("username");
+       name = prefs.getString("name");
+       role = prefs.getString("role");
+       token = prefs.getString("token");
+     });
+  }
+
+
+  void _logout () async{
+    final response = await http.post(login.url+"logout",
+        headers:
+        {
+          "Accept": 'application/json',
+          "Authorization":"Bearer $token",
+        });
+    print(response.statusCode.toString());
+    print("Bearer $token");
+    if(response.statusCode==200){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyApp()));
+    }
+    else{
+      print("Gagal Logout");
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -79,37 +105,38 @@ class _ProfilState extends State<Profil> {
                     Row(
                       children: <Widget>[
                         Icon(Icons.account_circle,size: 20,),
-                        Text(username,style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                        Text(" Username",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
                       ],
                     ),
                     TextField(
                       enabled: false,
                       decoration: InputDecoration(
+                        hintText: username
                       ),
                     ),
                     Row(
                       children: <Widget>[
                         Icon(Icons.person,size: 20,),
-                        Text(name,style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
+                        Text(" Nama",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17),)
                       ],
                     ),
                     TextField(
                       enabled: false,
                       decoration: InputDecoration(
-//                        hintText: '${widget.value.nama}',
+                        hintText: name,
                       ),
                     ),
                     const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
                     Row(
                       children: <Widget>[
                         Icon(Icons.work,size: 20,),
-                        Text(role,style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
+                        Text(" Role",style: TextStyle(fontFamily: 'Lato-Regular',fontSize: 17))
                       ],
                     ),
                     TextField(
                       enabled: false,
                       decoration: InputDecoration(
-                        //hintText: '${widget.value.role}',
+                      hintText: role
                       ),
                     ),
                     const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
@@ -119,7 +146,8 @@ class _ProfilState extends State<Profil> {
               SizedBox(height: 30,),
               RaisedButton(
                 onPressed: () {
-                  _showDialog();
+                  _showDialog(
+                  );
                 },
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0.0),

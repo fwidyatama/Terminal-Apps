@@ -6,6 +6,7 @@ import 'package:terminal_apps/Models/data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:terminal_apps/Views/Login.dart' as login;
 
 class Home extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _Home extends State<Home> {
   @override
   void initState() {
     _spinKitThreeBounce = SpinKitThreeBounce(
-      color: Colors.teal,
+      color: Colors.blue,
     );
     super.initState();
     _getJadwal();
@@ -30,7 +31,7 @@ class _Home extends State<Home> {
 
   _getJadwal() async {
    try{
-     var response = await http.get('https://api.myjson.com/bins/ysoxj');
+     var response = await http.get(login.url+"jadwal");
     if(response.statusCode==200){
       setState(() {
         final data = json.decode(response.body);
@@ -147,7 +148,7 @@ class _Home extends State<Home> {
                                       agenPelayaran: jadwal[index].agenPelayaran.nama,
                                       kota: jadwal[index].kota,
                                       statusKapal: jadwal[index].statusKapal,
-
+                                      waktu: jadwal[index].waktu,
                                         )));
                           },
                           child: Column(

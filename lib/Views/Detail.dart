@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:terminal_apps/Models/data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:terminal_apps/Views/Login.dart' as login;
 
 class Detail extends StatelessWidget {
   final int id;
@@ -38,15 +36,17 @@ class Detail extends StatelessWidget {
         token = prefs.getString("token");
       }
       _getValues();
-      final response = await http.post('http://10.2.232.132:80/api/login',
+      final response = await http.post(login.url+"jadwal/$id",
           headers:
           {
-            HttpHeaders.contentTypeHeader: "application/json",
-            HttpHeaders.authorizationHeader: "$token"
+            "Accept": 'application/json',
+            "Authorization":"Bearer $token",
           },
           body: {
             "statusKapal": status,
           });
+      print(status);
+      print(id);
       //var dapet = json.decode(response.body);
       if (response.statusCode == 200) {
         
@@ -137,7 +137,7 @@ class Detail extends StatelessWidget {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                              hintText: waktu.toString(),
+                              hintText: waktu.toString().substring(11,16) + " WIBS",
                               hintStyle: TextStyle(color: Colors.black)),
                         ),
                         const Padding(
@@ -156,7 +156,7 @@ class Detail extends StatelessWidget {
                         TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                              hintText: waktu.toString(),
+                              hintText: waktu.toString().substring(0,11),
                               hintStyle: TextStyle(color: Colors.black)),
                         ),
                         const Padding(

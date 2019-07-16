@@ -4,24 +4,26 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
-//import 'package:terminal_apps/Models/user.dart';
-//import 'package:terminal_apps/Views/navbar.dart';
+
+
+final url = "http://10.2.233.141/api/";
 
 class Login extends StatefulWidget {
   @override
+
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  //SpinKitThreeBounce _spinKitThreeBounce;
-  String errorLogin;
+  String errorLogin="";
+  bool isLoading = true;
   TextEditingController _username = new TextEditingController();
   TextEditingController _password = new TextEditingController();
-  //globalkey buat state
   var username = GlobalKey<FormState>();
   var password = GlobalKey<FormState>();
+
+
 
   _saveValues(String username, String name, String role, String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,7 +35,7 @@ class _LoginState extends State<Login> {
 
   Future<void> _login() async {
     try {
-      final response = await http.post('http://10.2.232.132:80/api/login',
+      final response = await http.post(url+"login",
           headers:
           {
             "Accept": 'application/json'
@@ -47,18 +49,17 @@ class _LoginState extends State<Login> {
       if (response.statusCode == 200) {
        Navigator.pushReplacementNamed(context, '/Navbar');
         String username = datauser['data']['username'];
-        String name = datauser['data']['name'];
+        String name = datauser['data']['nama'];
         String role = datauser['data']['access_role'];
         var token = datauser['meta']['token'];
         _saveValues(username, name, role, token);
+
       }
       else if(response.statusCode==400){
        setState(() {
          errorLogin=datauser['message'];
        });
       }
-
-
       return datauser;
     }catch (e) {
       print(e);
@@ -124,15 +125,23 @@ class _LoginState extends State<Login> {
         borderSide: BorderSide(color: Colors.blue, style: BorderStyle.solid),
         color: Colors.teal,
         onPressed: () {
-          if (username.currentState.validate() &&
-              password.currentState.validate()) {
-            _login();
-          } else {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text("Gagal"),
-              duration: Duration(seconds: 5),
-            ));
-          }
+        CircularProgressIndicator(
+          backgroundColor: Colors.blue,
+        );
+
+//          if (username.currentState.validate() &&
+//              password.currentState.validate()) {
+//
+//            Future.delayed(Duration(
+//                seconds: 1
+//            ));
+//            _login();
+//          } else {
+//            Scaffold.of(context).showSnackBar(SnackBar(
+//              content: Text("Gagal"),
+//              duration: Duration(seconds: 5),
+//            ));
+//          }
         },
         child: Text("Login",
             style: TextStyle(

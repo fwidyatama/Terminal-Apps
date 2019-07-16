@@ -10,16 +10,15 @@ class Navbar extends StatefulWidget {
   _NavbarState createState() => _NavbarState();
 }
 
-
-
 class _NavbarState extends State<Navbar> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
   int _selectedIndex = 0;
-  final _layoutPage=[Home(),Home(),Profil()];
+  final _layoutPage=[Home(),Profil()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

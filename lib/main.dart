@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:terminal_apps/Views/navbar.dart';
 import 'package:terminal_apps/Views/Login.dart';
 import 'package:terminal_apps/Views/Detail.dart';
+import 'package:terminal_apps/Views/Profil.dart';
 
 
 void main() => runApp(MyApp());
@@ -19,12 +20,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Ehehe",
       home: Scaffold(resizeToAvoidBottomPadding: false,
-        body: Detail(),
+        body: Login(),
       ),
       debugShowCheckedModeBanner: false,
       routes: <String,WidgetBuilder>{
         '/Login' : (BuildContext context) => new Login(),
         '/Navbar' : (BuildContext context) => new Navbar(),
+        '/Profil' : (BuildContext context) => new Profil(),
       },
     );
   }
