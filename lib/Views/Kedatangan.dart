@@ -8,13 +8,13 @@ import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:terminal_apps/Views/Login.dart' as login;
 
-class Home extends StatefulWidget {
+class Datang extends StatefulWidget {
   @override
-  _Home createState() => _Home();
+  _Datang createState() => _Datang();
   static String tag = 'home';
 }
 
-class _Home extends State<Home> {
+class _Datang extends State<Datang> {
   SpinKitThreeBounce _spinKitThreeBounce;
   var search = GlobalKey<FormState>();
   List jadwal = List();
@@ -35,7 +35,7 @@ class _Home extends State<Home> {
     if(response.statusCode==200){
       setState(() {
         final data = json.decode(response.body);
-        if(data['data']['statuskegiatan'] == "berangkat") {
+        if(data['data']['statuskegiatan'] == "datang") {
           jadwal = data['data'].map((data)=>Data.fromJson(data)).toList();
         }
       });

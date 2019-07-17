@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:terminal_apps/Views/Home.dart';
 import 'package:terminal_apps/Views/Profil.dart';
+import 'package:terminal_apps/Views/Kedatangan.dart';
 import 'package:terminal_apps/Models/user.dart';
 
 class Navbar extends StatefulWidget {
@@ -14,7 +15,7 @@ class Navbar extends StatefulWidget {
 class _NavbarState extends State<Navbar> {
   int _selectedIndex = 0;
 
-  final _layoutPage=[Home(),Profil()];
+  final _layoutPage=[Home(),Datang(),Profil()];
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 
 final url = "http://10.2.233.141/api/";
 
@@ -135,7 +133,7 @@ class _LoginState extends State<Login> {
 //            Future.delayed(Duration(
 //                seconds: 1
 //            ));
-//            _login();
+           _login();
 //          } else {
 //            Scaffold.of(context).showSnackBar(SnackBar(
 //              content: Text("Gagal"),

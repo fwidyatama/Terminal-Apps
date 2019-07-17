@@ -123,12 +123,22 @@ class Detail extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
+                            statusKegiatan == "datang" ?
                             Icon(
+                              Icons.arrow_downward,
+                              size: 20,
+                            ) : Icon(
                               Icons.arrow_upward,
                               size: 20,
                             ),
+                            statusKegiatan == "datang" ?
                             Text(
                               " Kedatangan",
+                              style: TextStyle(
+                                  fontFamily: 'Lato-Regular', fontSize: 17),
+                            ):
+                            Text(
+                              " Keberangkatan",
                               style: TextStyle(
                                   fontFamily: 'Lato-Regular', fontSize: 17),
                             )
