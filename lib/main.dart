@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:terminal_apps/Views/navbar.dart';
-import 'package:terminal_apps/Views/Login.dart';
-import 'package:terminal_apps/Views/Detail.dart';
+import 'package:terminal_apps/Views/login.dart';
+import 'package:terminal_apps/Views/keberangkatan.dart';
 import 'package:terminal_apps/Views/Profil.dart';
 
 
@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       home: Scaffold(resizeToAvoidBottomPadding: false,
         body: Login(),
       ),
-      debugShowCheckedModeBanner: false,
       routes: <String,WidgetBuilder>{
         '/Login' : (BuildContext context) => new Login(),
+        '/Home' : (BuildContext context) => new Home(),
         '/Navbar' : (BuildContext context) => new Navbar(),
         '/Profil' : (BuildContext context) => new Profil(),
       },

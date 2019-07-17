@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 
-final url = "http://10.2.233.141/api/";
+final url = "http://10.2.233.119/api/";
 
 class Login extends StatefulWidget {
   @override
@@ -47,11 +47,11 @@ class _LoginState extends State<Login> {
       var datauser = json.decode(response.body);
 
       if (response.statusCode == 200) {
-       Navigator.pushReplacementNamed(context, '/Navbar');
+        Navigator.pushReplacementNamed(context, '/Navbar');
         String username = datauser['data']['username'];
         String name = datauser['data']['nama'];
         String role = datauser['data']['access_role'];
-        var token = datauser['meta']['token'];
+        String token = datauser['meta']['token'];
         _saveValues(username, name, role, token);
 
       }
@@ -59,11 +59,25 @@ class _LoginState extends State<Login> {
        setState(() {
          errorLogin=datauser['message'];
        });
+       Navigator.of(context).pop();
       }
       return datauser;
     }catch (e) {
       print(e);
     }
+  }
+
+  void _loading(){
+    showDialog(context: context,
+    builder: (context) {
+      return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.blue,
+          )
+      );
+    },);
+    _login();
+    _password.clear();
   }
 
   TextStyle style = TextStyle(
@@ -119,35 +133,27 @@ class _LoginState extends State<Login> {
       ),
     );
 
-    var buttonLogin = OutlineButton(
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(30)),
-        borderSide: BorderSide(color: Colors.blue, style: BorderStyle.solid),
-        color: Colors.teal,
-        onPressed: () {
-        CircularProgressIndicator(
-          backgroundColor: Colors.blue,
-        );
-
-//          if (username.currentState.validate() &&
-//              password.currentState.validate()) {
-//
-//            Future.delayed(Duration(
-//                seconds: 1
-//            ));
-//            _login();
-//          } else {
-//            Scaffold.of(context).showSnackBar(SnackBar(
-//              content: Text("Gagal"),
-//              duration: Duration(seconds: 5),
-//            ));
-//          }
-        },
-        child: Text("Login",
-            style: TextStyle(
-                fontFamily: 'SF-UI-Display-Regular-UI-Display-Regular',
-                fontSize: 15,
-                color: Color.fromRGBO(42, 42, 42, 1))));
+    var buttonLogin = SizedBox(
+      width: double.infinity,
+      child: FlatButton(
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30)),
+          color: Colors.blue,
+          onPressed: () {
+            if (username.currentState.validate() &&
+                password.currentState.validate()) {
+              Future.delayed(Duration(
+                  seconds: 1
+              ));
+              _loading();
+            }
+          },
+          child: Text("Login",
+              style: TextStyle(
+                  fontFamily: 'SF-UI-Display-Regular-UI-Display-Regular',
+                  fontSize: 15,
+                  color: Colors.white),
+    )));
 
     return SafeArea(
       child:Stack(

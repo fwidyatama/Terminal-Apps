@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:terminal_apps/Models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:terminal_apps/main.dart';
-import 'package:terminal_apps/Views/Login.dart' as login;
+import 'package:terminal_apps/Views/login.dart' as login;
 class Profil extends StatefulWidget {
    @override
   _ProfilState createState() => _ProfilState();
@@ -44,9 +43,8 @@ class _ProfilState extends State<Profil> {
               highlightElevation: 0,
               child: new Text("Ya",style: TextStyle(color: Colors.white),),
               onPressed: () {
-                Navigator.of(context).pop();
                 _logout();
-
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -72,8 +70,6 @@ class _ProfilState extends State<Profil> {
           "Accept": 'application/json',
           "Authorization":"Bearer $token",
         });
-    print(response.statusCode.toString());
-    print("Bearer $token");
     if(response.statusCode==200){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyApp()));
     }
