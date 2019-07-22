@@ -4,6 +4,8 @@ import 'package:terminal_apps/Views/keberangkatan.dart';
 import 'package:terminal_apps/Views/Profil.dart';
 import 'package:terminal_apps/Views/Kedatangan.dart';
 import 'package:terminal_apps/Models/user.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 
 class Navbar extends StatefulWidget {
   final User value;
@@ -31,16 +33,16 @@ class _NavbarState extends State<Navbar> {
           },
           items: [
             BottomNavyBarItem(
-              icon: Icon(Icons.apps),
+              icon: Icon(MdiIcons.ferry),
               title: Text('Keberangkatan'),
               activeColor: Colors.red,
             ),
             BottomNavyBarItem(
-                icon: Icon(Icons.people),
+                icon: Icon(MdiIcons.ferry),
                 title: Text('Kedatangan'),
                 activeColor: Colors.purpleAccent),
             BottomNavyBarItem(
-                icon: Icon(Icons.people),
+                icon: Icon(MdiIcons.humanHandsup),
                 title: Text('Profil'),
                 activeColor: Colors.pink),
           ],

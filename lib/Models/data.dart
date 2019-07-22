@@ -74,6 +74,7 @@ class AgenPelayaran {
   String nama;
   String logo;
   String loket;
+  String gambar;
 
   AgenPelayaran({this.id, this.nama, this.logo, this.loket});
 

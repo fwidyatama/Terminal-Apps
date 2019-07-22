@@ -6,24 +6,20 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-
-final url = "http://10.2.233.119/api/";
+var url = "http://10.2.233.104/api/";
 
 class Login extends StatefulWidget {
   @override
-
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  String errorLogin="";
+  String errorLogin = "";
   bool isLoading = true;
   TextEditingController _username = new TextEditingController();
   TextEditingController _password = new TextEditingController();
   var username = GlobalKey<FormState>();
   var password = GlobalKey<FormState>();
-
-
 
   _saveValues(String username, String name, String role, String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -35,17 +31,13 @@ class _LoginState extends State<Login> {
 
   Future<void> _login() async {
     try {
-      final response = await http.post(url+"login",
-          headers:
-          {
-            "Accept": 'application/json'
-          },
-          body: {
-            "username": _username.text,
-            "password": _password.text,
-          });
+      final response = await http.post(url + "login", headers: {
+        "Accept": 'application/json'
+      }, body: {
+        "username": _username.text,
+        "password": _password.text,
+      });
       var datauser = json.decode(response.body);
-
       if (response.statusCode == 200) {
         Navigator.pushReplacementNamed(context, '/Navbar');
         String username = datauser['data']['username'];
@@ -53,29 +45,27 @@ class _LoginState extends State<Login> {
         String role = datauser['data']['access_role'];
         String token = datauser['meta']['token'];
         _saveValues(username, name, role, token);
-
+      } else if (response.statusCode == 400) {
+        setState(() {
+          errorLogin = datauser['message'];
+        });
+        Navigator.of(context).pop();
       }
-      else if(response.statusCode==400){
-       setState(() {
-         errorLogin=datauser['message'];
-       });
-       Navigator.of(context).pop();
-      }
-      return datauser;
-    }catch (e) {
+    } catch (e) {
       print(e);
     }
   }
 
-  void _loading(){
-    showDialog(context: context,
-    builder: (context) {
-      return Center(
-          child: CircularProgressIndicator(
-            backgroundColor: Colors.blue,
-          )
-      );
-    },);
+  void _loading() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+            child: CircularProgressIndicator(
+          backgroundColor: Colors.blue,
+        ));
+      },
+    );
     _login();
     _password.clear();
   }
@@ -95,7 +85,7 @@ class _LoginState extends State<Login> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide:
-                BorderSide(color: Color.fromRGBO(112, 112, 112, 1))),
+                    BorderSide(color: Color.fromRGBO(112, 112, 112, 1))),
             hintText: "Input Username",
             prefixIcon: Icon(
               Icons.email,
@@ -134,68 +124,68 @@ class _LoginState extends State<Login> {
     );
 
     var buttonLogin = SizedBox(
-      width: double.infinity,
-      child: FlatButton(
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30)),
-          color: Colors.blue,
-          onPressed: () {
-            if (username.currentState.validate() &&
-                password.currentState.validate()) {
-              Future.delayed(Duration(
-                  seconds: 1
-              ));
-              _loading();
-            }
-          },
-          child: Text("Login",
+        width: double.infinity,
+        child: FlatButton(
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30)),
+            color: Colors.blue,
+            onPressed: () {
+              if (username.currentState.validate() &&
+                  password.currentState.validate()) {
+                Future.delayed(Duration(seconds: 1));
+                _loading();
+              }
+            },
+            child: Text(
+              "Login",
               style: TextStyle(
                   fontFamily: 'SF-UI-Display-Regular-UI-Display-Regular',
                   fontSize: 15,
                   color: Colors.white),
-    )));
+            )));
 
     return SafeArea(
-      child:Stack(
-        children: <Widget>[
+        child: Stack(children: <Widget>[
       Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
           SizedBox(height: 85),
-        SizedBox(
-            height: 200,
-            child: Image.asset('assets/img/logo.png', fit: BoxFit.contain)),
-        Padding(
-          padding: EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(
-                child:
-                Text(errorLogin.toString(),style: TextStyle(fontSize: 15,color: Colors.red),),
-    ),
-              Text("Username",
-                  style: TextStyle(
-                      fontFamily: 'Segoe UI',
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold)),
-              const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
-              usernameField,
-              const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
-              Text("Password",
-                  style: TextStyle(
-                      fontFamily: 'Segoe UI',
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold)),
-              const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
-              passwordField,
-              const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 20)),
-              Center(child: buttonLogin),
-            ],
-          ),
-        )],
+          SizedBox(
+              height: 200,
+              child: Image.asset('assets/img/logo.png', fit: BoxFit.contain)),
+          Padding(
+            padding: EdgeInsets.all(30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Center(
+                  child: Text(
+                    errorLogin.toString(),
+                    style: TextStyle(fontSize: 15, color: Colors.red),
+                  ),
+                ),
+                Text("Username",
+                    style: TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold)),
+                const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                usernameField,
+                const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                Text("Password",
+                    style: TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold)),
+                const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 10)),
+                passwordField,
+                const Padding(padding: EdgeInsets.fromLTRB(5, 5, 5, 20)),
+                Center(child: buttonLogin),
+              ],
+            ),
+          )
+        ],
       )
-          ])
-      );
+    ]));
   }
 }

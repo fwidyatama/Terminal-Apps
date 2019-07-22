@@ -72,6 +72,7 @@ class _ProfilState extends State<Profil> {
         });
     if(response.statusCode==200){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyApp()));
+
     }
     else{
       print("Gagal Logout");
