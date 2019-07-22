@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:terminal_apps/Views/Home.dart';
+import 'package:terminal_apps/Views/keberangkatan.dart';
 import 'package:terminal_apps/Views/Profil.dart';
-import 'package:terminal_apps/Views/Kedatangan.dart';
+import 'package:terminal_apps/Views/kedatangan.dart';
 import 'package:terminal_apps/Models/user.dart';
 
 class Navbar extends StatefulWidget {
