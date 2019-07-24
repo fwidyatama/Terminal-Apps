@@ -1,3 +1,5 @@
+import 'dart:ui' as prefix0;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
@@ -27,19 +29,11 @@ class _Datang extends State<Datang> {
 
   @override
   void initState() {
-    _spinKitThreeBounce = SpinKitThreeBounce(
-      color: Colors.blue,
-    );
     _getValues();
-    super.initState();
     _getMoreData();
+    super.initState();
   }
 
-  void loading() {
-    _spinKitThreeBounce = SpinKitThreeBounce(
-      color: Colors.blue,
-    );
-  }
 
   _getValues() async {
     final prefs = await SharedPreferences.getInstance();
@@ -86,7 +80,7 @@ class _Datang extends State<Datang> {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('EEE d MMM yyyy').format(now);
 
-    if (!(search.text.isEmpty)) {
+    if (search.text.isNotEmpty) {
       List tempList = new List();
       for (int i = 0; i < filtered.length; i++) {
         if (filtered[i]
@@ -100,54 +94,61 @@ class _Datang extends State<Datang> {
       filtered = tempList;
     }
 
-    final textTop = Container(
-        padding: EdgeInsets.fromLTRB(0, 25, 0, 5),
-        child: Text(
-          'KeDatangan',
-          style: TextStyle(
-              fontSize: 35.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'circular-medium'),
-          textAlign: TextAlign.center,
-        ));
-
-    var kalender = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+    Widget textTop() {
+      return Container(
+          padding: EdgeInsets.fromLTRB(30, 60, 30, 20),
           child: Text(
-            jadwal.length.toString() + " Results",
-            style: TextStyle(fontSize: 15.0, color: Colors.grey),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
-          child: RaisedButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
+            'Kedatangan',
+            style: TextStyle(
+                fontSize: 35.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontFamily: 'circular-medium'),
+            textAlign: TextAlign.center,
+          ));
+    }
+
+    Widget kalender() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+            child: Text(
+              jadwal.length.toString() + " Results",
+              style: TextStyle(fontSize: 15.0, color: Colors.grey),
             ),
-            onPressed: () {},
-            color: Colors.blueAccent,
-            padding: EdgeInsets.all(12),
-            child: Text(formattedDate, style: TextStyle(color: Colors.white)),
           ),
-        )
-      ],
-    );
-    var searchForm = Form(
-        child: TextFormField(
-      controller: search,
-      autofocus: false,
-      obscureText: false,
-      decoration: InputDecoration(
-        prefixIcon: new Icon(Icons.search),
-        hintText: 'Search',
-        contentPadding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-      ),
-    ));
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              onPressed: () {},
+              color: Colors.blueAccent,
+              padding: EdgeInsets.all(12),
+              child: Text(formattedDate, style: TextStyle(color: Colors.white)),
+            ),
+          )
+        ],
+      );
+    }
+
+    Widget searchForm() {
+      return Form(
+          child: TextFormField(
+        controller: search,
+        autofocus: false,
+        keyboardAppearance: prefix0.Brightness.light,
+        decoration: InputDecoration(
+          prefixIcon: new Icon(Icons.search),
+          hintText: 'Search',
+          contentPadding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
+        ),
+      ));
+    }
 
     Widget _status(String status) {
       if (status.contains("on schedule")) {
@@ -171,7 +172,7 @@ class _Datang extends State<Datang> {
           width: 130,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(25)),
-              color: Colors.yellow),
+              color: Colors.blue),
           child: Text(
             status,
             style: TextStyle(
@@ -193,188 +194,148 @@ class _Datang extends State<Datang> {
           ),
         );
       }
+      return null;
     }
 
-    return MaterialApp(
-        home: Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _spinKitThreeBounce,
-          SafeArea(
-              child: LazyLoadScrollView(
-            scrollOffset: 100,
-            onEndOfPage: () => _getMoreData(),
-            child: CustomScrollView(
-              semanticChildCount: jadwal == null ? 0 : filtered.length,
-              slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: 220,
-                  floating: false,
-                  pinned: false,
-                  backgroundColor: Colors.white,
-                  primary: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: SafeArea(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0.0, 0, 0.0, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            textTop,
-                            kalender,
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.0),
-                              child: searchForm,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
+    Widget listBuilder() {
+      return Expanded(
+          child: LazyLoadScrollView(
+              scrollOffset: 200,
+              onEndOfPage: _getMoreData,
+              child: ListView.builder(
+                itemCount: filtered.length,
+                itemBuilder: (BuildContext context, index) {
                   return GestureDetector(
-                    child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Detail(
-                                      id: filtered[index].id,
-                                      kapal: filtered[index].kapal.nama,
-                                      agenPelayaran:
-                                          filtered[index].agenPelayaran.nama,
-                                      kota: filtered[index].kota,
-                                      statusKapal: filtered[index].statusKapal,
-                                      waktu: filtered[index].waktu,
-                                      isBerangkat: false,
-                                      token: token,
-                                      terakhirDiubah:
-                                          filtered[index].updatedAt)));
-                        },
-                        child: Column(
-                          children: <Widget>[
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                margin: EdgeInsets.fromLTRB(10, 10, 10, 5),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Column(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Detail(
+                                    id: filtered[index].id,
+                                    kapal: filtered[index].kapal.nama,
+                                    agenPelayaran:
+                                        filtered[index].agenPelayaran.nama,
+                                    kota: filtered[index].kota,
+                                    statusKapal: filtered[index].statusKapal,
+                                    waktu: filtered[index].waktu,
+                                    isBerangkat: false,
+                                    token: token,
+                                    terakhirDiubah:
+                                        filtered[index].updatedAt)));
+                      },
+                      child: Card(
+                        color: Color.fromRGBO(250, 250, 250, 2),
+                        elevation: 2,
+                        margin: EdgeInsets.fromLTRB(20, 10, 20, 5),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(250, 250, 250, 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          margin: EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Image.asset(
+                                      'assets/img/logo_pelni.png',
+                                      scale: 3.5,
+                                    ),
+                                  ),
+                                  Text(filtered[index].agenPelayaran.nama)
+                                ],
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    child: Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                                        Container(
-                                          padding: EdgeInsets.all(10),
-                                          child: Image.asset(
-                                            'assets/img/logo_pelni.png',
-                                            scale: 3.5,
-                                          ),
+                                        Text(
+                                          filtered[index].kapal.nama,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: "Montserrat",
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Text(filtered[index]
-                                            .kapal
-                                            .nama
-                                            .toString())
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Divider(
+                                            height: 5, color: Colors.black26),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          child: _status(
+                                              filtered[index].statusKapal),
+                                        )
                                       ],
                                     ),
-                                    Expanded(
-                                        child: Container(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Text(
-                                            filtered[index]
-                                                    .waktu
-                                                    .substring(11, 16)
-                                                    .toString() +
-                                                " WIB",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontFamily: "Montserrat",
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Divider(
-                                            height: 2,
-                                          ),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Column(
-                                                children: <Widget>[
-                                                  Text(
-                                                    filtered[index]
-                                                            .waktu
-                                                            .substring(11, 16)
-                                                            .toString() +
-                                                        " WIB",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontFamily:
-                                                            "Montserrat",
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Container(
-                                                    child: _status(
-                                                        filtered[index]
-                                                            .statusKapal
-                                                            .toString()),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-                                          Text(
-                                            filtered[index].kota,
-                                            style: TextStyle(
-                                                color: Colors.blueGrey,
-                                                fontFamily: "Montserrat",
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
+                                  )),
+                              Expanded(
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        filtered[index]
+                                                .waktu
+                                                .toString()
+                                                .substring(11, 16) +
+                                            " WIB",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: "Montserrat",
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    )),
-                                  ],
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        filtered[index].kota,
+                                        style: TextStyle(
+                                            color: Colors.blueGrey,
+                                            fontFamily: "Montserrat",
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
-                        )),
-                  );
-                }, childCount: jadwal == null ? 0 : filtered.length)),
-              ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ));
+                },
+              )));
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            textTop(),
+            kalender(),
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: searchForm(),
             ),
-          )),
-        ],
+            listBuilder()
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

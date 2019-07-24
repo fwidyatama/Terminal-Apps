@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:terminal_apps/Views/login.dart' as login;
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:terminal_apps/Views/keberangkatan.dart';
-import 'package:terminal_apps/Views/kedatangan.dart';
 
 class Detail extends StatefulWidget {
   int id;
@@ -99,8 +96,7 @@ class _DetailState extends State<Detail> {
                     leading: IconButton(
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Datang()));
+                        Navigator.of(context).pop(context);
                       },
                       color: Colors.black,
                       iconSize: 35,
@@ -112,8 +108,7 @@ class _DetailState extends State<Detail> {
                     leading: IconButton(
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Home()));
+                        Navigator.of(context).pop(context);
                       },
                       color: Colors.black,
                       iconSize: 35,

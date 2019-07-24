@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-var url = "http://10.2.233.104/api/";
+var url = "http://10.2.233.161/api/";
 
 class Login extends StatefulWidget {
   @override
@@ -21,12 +22,23 @@ class _LoginState extends State<Login> {
   var username = GlobalKey<FormState>();
   var password = GlobalKey<FormState>();
 
-  _saveValues(String username, String name, String role, String token) async {
+  _saveValues(String username, String name, String role, String token,String permission) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("username", username);
     prefs.setString("name", name);
     prefs.setString("role", role);
     prefs.setString("token", token);
+    prefs.setString("permission", permission);
+  }
+
+  _clearPref() async {
+    final pref = await SharedPreferences.getInstance();
+    pref.clear();
+  }
+
+  void initState() {
+    _clearPref();
+    super.initState();
   }
 
   Future<void> _login() async {
@@ -39,12 +51,17 @@ class _LoginState extends State<Login> {
       });
       var datauser = json.decode(response.body);
       if (response.statusCode == 200) {
+        setState(() {
+          String username = datauser['data']['username'];
+          String name = datauser['data']['nama'];
+          String role = datauser['data']['access_role'];
+          String token = datauser['meta']['token'];
+          String permission = datauser['data']['permission'].toString().replaceAll(",","\n").replaceAll("[","").replaceAll("]", "");
+          _saveValues(username, name, role, token,permission);
+        }
+        );
+
         Navigator.pushReplacementNamed(context, '/Navbar');
-        String username = datauser['data']['username'];
-        String name = datauser['data']['nama'];
-        String role = datauser['data']['access_role'];
-        String token = datauser['meta']['token'];
-        _saveValues(username, name, role, token);
       } else if (response.statusCode == 400) {
         setState(() {
           errorLogin = datauser['message'];
@@ -60,9 +77,16 @@ class _LoginState extends State<Login> {
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
-            child: CircularProgressIndicator(
-          backgroundColor: Colors.blue,
+        return Center(child: SpinKitWave(
+          itemBuilder: (_, int index) {
+            return DecoratedBox(
+              decoration: BoxDecoration(
+                color: index.isEven
+                    ? Color.fromRGBO(13, 71, 161, 1)
+                    : Color.fromRGBO(19, 195, 247, 1),
+              ),
+            );
+          },
         ));
       },
     );
